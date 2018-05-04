@@ -27,7 +27,8 @@ COPY --from=build /go/src/slurp/slurp /bin/slurp
 COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
 # Add permutations to workdir.
-COPY *.json ./
+ARG permutations=permutations.json
+COPY ${permutations} ./permutations.json
 
 # Run slurp when the container starts
 ENTRYPOINT [ "/bin/slurp" ]
